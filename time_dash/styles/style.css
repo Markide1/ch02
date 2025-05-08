@@ -1,4 +1,4 @@
-/* Reset */
+/* Basic Styling */
 * {
   margin: 0;
   padding: 0;
@@ -16,3 +16,173 @@ body {
   align-items: center;
   padding: 24px;
 }
+
+
+/* Main styling */
+.dashboard {
+  max-width: 1110px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 24px;
+}
+
+/* User Card */
+.user-card {
+  background-color: hsl(235, 46%, 20%);
+  border-radius: 15px;
+  grid-row: span 2;
+  overflow: hidden;
+}
+
+.user-info {
+  background-color: hsl(246, 80%, 60%);
+  padding: 35px 30px;
+  border-radius: 15px;
+}
+
+.user-img {
+  width: 78px;
+  height: 78px;
+  border: 3px solid white;
+  border-radius: 50%;
+  margin-bottom: 40px;
+}
+
+.report-for {
+  color: hsl(236, 100%, 87%);
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 6px;
+}
+
+.user-name {
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.time-period {
+  padding: 24px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.period-btn {
+  background: none;
+  border: none;
+  color: hsl(235, 45%, 61%);
+  font-family: 'Rubik', sans-serif;
+  font-size: 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.period-btn:hover {
+  color: white;
+}
+
+.period-btn.active {
+  color: white;
+}
+
+/* Activity Cards */
+.activity-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.card-bg {
+  height: 45px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-icon {
+  position: absolute;
+  right: 17px;
+  top: -10px;
+  height: 78px;
+}
+
+.card-content {
+  background-color: hsl(235, 46%, 20%);
+  padding: 28px 30px;
+  border-radius: 15px;
+  position: relative;
+  top: -15px;
+  height: calc(100% - 30px);
+  transition: background-color 0.2s;
+}
+
+.card-content:hover {
+  background-color: hsl(235, 45%, 30%);
+  cursor: pointer;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hours {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.previous-hours {
+  color: hsl(236, 100%, 87%);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+/* Activity Card Colors */
+.work .card-bg {
+  background-color: hsl(15, 100%, 70%);
+}
+
+.play .card-bg {
+  background-color: hsl(195, 74%, 62%);
+}
+
+.study .card-bg {
+  background-color: hsl(348, 100%, 68%);
+}
+
+.exercise .card-bg {
+  background-color: hsl(145, 58%, 55%);
+}
+
+.social .card-bg {
+  background-color: hsl(264, 64%, 52%);
+}
+
+.self-care .card-bg {
+  background-color: hsl(43, 84%, 65%);
+}
+
