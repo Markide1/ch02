@@ -18,11 +18,12 @@
       rel="stylesheet"
     />
   </head>
-  
   <body>
-    <main class="container">
+    <div class="container">
       <header class="header">
-        <h1 class="win">W.</h1>
+        <div class="logo">
+          <h1 class="win">W.</h1>
+        </div>
         <nav class="headlines">
           <button class="menu-toggle" aria-label="toggle menu">
             <span class="hamburger"></span>
@@ -36,21 +37,22 @@
           </ul>
         </nav>
       </header>
-       <div class="future">
-        <div class="bg_img">
-          <img
-            src="./assets/images/image-web-3-desktop.jpg"
-            alt="Web 3.0 illustration"
-            class="desktop-img"
-          />
-          <img
-            src="./assets/images/image-web-3-mobile.jpg"
-            alt="Web 3.0 illustration"
-            class="mobile-img"
-          />
-        </div>
 
-        <div class="content-wrapper">
+      <div class="main-grid">
+        <div class="future">
+          <div class="bg_img">
+            <img
+              src="./assets/images/image-web-3-desktop.jpg"
+              alt="Web 3.0 illustration"
+              class="desktop-img"
+            />
+            <img
+              src="./assets/images/image-web-3-mobile.jpg"
+              alt="Web 3.0 illustration"
+              class="mobile-img"
+            />
+          </div>
+
           <div class="bright">
             <h1 class="web">The Bright Future of Web 3.0?</h1>
           </div>
@@ -66,8 +68,91 @@
             </div>
           </div>
         </div>
-      </div>
 
-    </main>
+        <aside class="new-section">
+          <h2 class="cars">New</h2>
+
+          <div class="replace">
+            <h3 class="gas">Hydrogen VS Electric Cars</h3>
+            <p class="answer">
+              Will hydrogen-fueled cars ever catch up to EVs?
+            </p>
+          </div>
+
+          <hr />
+
+          <div class="replace">
+            <h3 class="gas">The Downsides of AI Artistry</h3>
+            <p class="answer">
+              What are the possible adverse effects of on-demand AI image
+              generation?
+            </p>
+          </div>
+
+          <hr />
+
+          <div class="replace">
+            <h3 class="gas">Is VC Funding Drying Up?</h3>
+            <p class="answer">
+              Private funding by VC firms is down 50% YOY. We take a look at
+              what that means.
+            </p>
+          </div>
+        </aside>
+
+        <section class="bottom">
+          <div class="info">
+            <div class="pic">
+              <img src="./assets/images/image-retro-pcs.jpg" alt="retro" />
+            </div>
+            <div class="text-content">
+              <div class="num">
+                <h2 class="pos">01</h2>
+              </div>
+              <div class="quiz">
+                <h3 class="feature">Reviving Retro PCs</h3>
+                <p class="done">
+                  What happens when old PCs are given modern upgrades?
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="pic">
+              <img src="./assets/images/image-top-laptops.jpg" alt="laptops" />
+            </div>
+            <div class="text-content">
+              <div class="num">
+                <h2 class="pos">02</h2>
+              </div>
+              <div class="quiz">
+                <h3 class="feature">Top 10 Laptops of 2022</h3>
+                <p class="done">
+                  Our best picks for various needs and budgets.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="pic">
+              <img src="./assets/images/image-gaming-growth.jpg" alt="gaming" />
+            </div>
+            <div class="text-content">
+              <div class="num">
+                <h2 class="pos">03</h2>
+              </div>
+              <div class="quiz">
+                <h3 class="feature">The Growth of Gaming</h3>
+                <p class="done">
+                  How the pandemic has sparked fresh opportunities.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </body>
 </html>
