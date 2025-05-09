@@ -13,3 +13,157 @@ body {
   color: hsl(236, 13%, 42%);
   padding: 0 1rem;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: hsl(236, 13%, 42%);
+}
+
+a:hover {
+  color: hsl(5, 85%, 63%);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid hsl(233, 8%, 79%);
+  margin: 1.5rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.win {
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: hsl(240, 100%, 5%);
+}
+
+.headlines ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: hsl(240, 100%, 5%);
+  position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(240, 100%, 5%);
+  left: 0;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  top: 8px;
+}
+/* Main grid layout */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: 
+    "header header header"
+    "future future new-section"
+    "bottom bottom bottom";
+  gap: 2rem;
+}
+
+.header {
+  grid-area: header;
+}
+
+.future {
+  grid-area: future;
+}
+
+.new-section {
+  grid-area: new-section;
+}
+
+.bottom {
+  grid-area: bottom;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Future section */
+.bg_img {
+  margin-bottom: 2rem;
+}
+
+.mobile-img {
+  display: none;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.web {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: hsl(240, 100%, 5%);
+}
+
+.power {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.read {
+  background-color: hsl(5, 85%, 63%);
+  color: hsl(36, 100%, 99%);
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 3px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.read:hover {
+  background-color: hsl(240, 100%, 5%);
+}
