@@ -1,0 +1,15 @@
+/* Basic styling */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  background-color: hsl(36, 100%, 99%);
+  color: hsl(236, 13%, 42%);
+  padding: 0 1rem;
+}
