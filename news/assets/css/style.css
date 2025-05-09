@@ -1,5 +1,4 @@
 /* Basic styling */
-
 * {
   margin: 0;
   padding: 0;
@@ -9,9 +8,12 @@
 body {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
-  background-color: hsl(36, 100%, 99%);
+  background-color: hsl(0, 0%, 94%);
   color: hsl(236, 13%, 42%);
-  padding: 0 1rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 img {
@@ -36,12 +38,16 @@ a:hover {
 hr {
   border: none;
   border-top: 1px solid hsl(233, 8%, 79%);
-  margin: 1.5rem 0;
+  margin: 2rem 0;
+  opacity: 0.3;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 2rem auto;
+  max-width: 1440px;
+  margin: 5rem auto;
+  background-color: hsl(36, 100%, 99%);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  padding: 0 1rem;
 }
 
 /* Header */
@@ -49,18 +55,32 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
 }
 
 .win {
   font-weight: 800;
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: hsl(240, 100%, 5%);
 }
 
 .headlines ul {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
+}
+
+.headlines ul li a {
+  font-size: 15px;
+  color: hsl(236, 13%, 42%);
+}
+
+.headlines ul li a:hover {
+  color: hsl(5, 85%, 63%);
 }
 
 .menu-toggle {
@@ -95,55 +115,53 @@ hr {
 .hamburger::after {
   top: 8px;
 }
+
 /* Main grid layout */
-.container {
+.main-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas: 
-    "header header header"
     "future future new-section"
     "bottom bottom bottom";
   gap: 2rem;
 }
 
-.header {
-  grid-area: header;
-}
-
+/* Future section with grid layout */
 .future {
   grid-area: future;
-}
-
-.new-section {
-  grid-area: new-section;
-}
-
-.bottom {
-  grid-area: bottom;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "img img"
+    "title content";
   gap: 2rem;
 }
 
-/* Future section */
 .bg_img {
-  margin-bottom: 2rem;
+  grid-area: img;
+  margin-bottom: 1rem;
+}
+
+.bright {
+  grid-area: title;
+}
+
+.more-wrapper {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .mobile-img {
   display: none;
 }
 
-.content-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
 .web {
   font-size: 3.5rem;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1;
   color: hsl(240, 100%, 5%);
 }
 
@@ -162,8 +180,143 @@ hr {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 14px;
 }
 
 .read:hover {
   background-color: hsl(240, 100%, 5%);
+}
+
+/* New section */
+.new-section {
+  grid-area: new-section;
+  background-color: hsl(240, 100%, 5%);
+  padding: 2rem 1.5rem;
+}
+
+.cars {
+  color: hsl(35, 77%, 62%);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.gas {
+  color: hsl(36, 100%, 99%);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+}
+
+.gas:hover {
+  color: hsl(35, 77%, 62%);
+}
+
+.answer {
+  color: hsl(233, 8%, 79%);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Bottom section */
+.bottom {
+  grid-area: bottom;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.info {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.pic {
+  flex: 0 0 100px;
+  height: 130px;
+}
+
+.pic img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.pos {
+  color: hsl(233, 8%, 79%);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+.feature {
+  color: hsl(240, 100%, 5%);
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+  cursor: pointer;
+}
+
+.feature:hover {
+  color: hsl(5, 85%, 63%);
+}
+
+.done {
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .container {
+    margin: 0;
+    padding: 1.5rem;
+  }
+  
+  .main-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "future"
+      "new-section"
+      "bottom";
+  }
+
+  .future {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "img"
+      "title"
+      "content";
+  }
+
+  .desktop-img {
+    display: none;
+  }
+
+  .mobile-img {
+    display: block;
+  }
+
+  .web {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .bottom {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .headlines ul {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
 }
