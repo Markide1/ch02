@@ -12,3 +12,102 @@ body {
   line-height: 1.6;
 }
 
+/* Container and Layout */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 10%;
+}
+
+.product-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  margin-top: 50px;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 25px 0;
+  border-bottom: 1px solid hsl(220, 14%, 90%);
+  position: relative;
+}
+
+.logo {
+  margin-right: 40px;
+}
+
+.win {
+  font-size: 28px;
+  font-weight: 700;
+  color: hsl(220, 13%, 13%);
+}
+
+.headlines {
+  margin-right: auto;
+}
+
+.headlines ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.headlines a {
+  text-decoration: none;
+  color: hsl(219, 9%, 45%);
+  position: relative;
+  padding: 35px 0;
+}
+
+.headlines a:hover {
+  color: hsl(220, 13%, 13%);
+}
+
+.headlines a:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: hsl(26, 100%, 55%);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background-color: hsl(219, 9%, 45%);
+  position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 3px;
+  background-color: hsl(219, 9%, 45%);
+  left: 0;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  bottom: -8px;
+}
