@@ -1,47 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Results summary component</title>
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <title>Frontend Mentor | Results summary component</title>
 
-  Your Result
-  76
-  of 100
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/styles/style.css" />
 
-  Great
-  You scored higher than 65% of the people who have taken these tests.
-  
-  Summary
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="header">
+          <h1>Summary</h1>
+        </div>
+        <div class="content">
+          <div class="score">
+            <h2>Your Result</h2>
+            <p>76</p>
+            <span>of 100</span>
+          </div>
+          <div class="summary">
+            <h3>Great</h3>
+            <p>You scored higher than 65% of the people who have taken these tests.</p>
+          </div>
+        </div>
+        <div class="details">
+          <h2>Summary</h2>
+          <ul>
+            <li>
+              <span>Reaction</span>
+              <span>80 / 100</span>
+              <img src="./assets/images/icon-reaction.svg" alt="Reaction Icon">
+            </li>
+            <li>
+              <span>Memory</span>
+              <span>92 / 100</span>
+              <img src="./assets/images/icon-memory.svg" alt="Memory Icon">
+            </li>
+            <li>
+              <span>Verbal</span>
+              <span>61 / 100</span>
+              <img src="./assets/images/icon-verbal.svg" alt="Verbal Icon">
+            </li>
+            <li>
+              <span>Visual</span>
+              <span>72 / 100</span>
+              <img src="./assets/images/icon-visual.svg" alt="Visual Icon">
+            </li>
+          </ul>
+        </div>
 
-  Reaction
-  80 / 100
+        <!-- Button -->
+        <button type="button" class="continue">Continue</button>
 
-  Memory
-  92 / 100
-
-  Verbal
-  61 / 100
-
-  Visual
-  72 / 100
-
-  Continue
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+      </div>
+    </div>
+  </body>
 </html>
