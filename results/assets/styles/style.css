@@ -1,0 +1,12 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Hanken Grotesk', sans-serif;
+  background-color: hsl(221, 100%, 96%);
+  font-size: 18px;
+  line-height: 1.5;
+}
