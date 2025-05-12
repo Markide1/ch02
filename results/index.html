@@ -26,53 +26,89 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <div class="container">
-      <div class="card">
-        <div class="header">
-          <h1>Summary</h1>
-        </div>
-        <div class="content">
-          <div class="score">
-            <h2>Your Result</h2>
-            <p>76</p>
-            <span>of 100</span>
-          </div>
-          <div class="summary">
-            <h3>Great</h3>
-            <p>You scored higher than 65% of the people who have taken these tests.</p>
-          </div>
-        </div>
-        <div class="details">
-          <h2>Summary</h2>
-          <ul>
-            <li>
-              <span>Reaction</span>
-              <span>80 / 100</span>
-              <img src="./assets/images/icon-reaction.svg" alt="Reaction Icon">
-            </li>
-            <li>
-              <span>Memory</span>
-              <span>92 / 100</span>
-              <img src="./assets/images/icon-memory.svg" alt="Memory Icon">
-            </li>
-            <li>
-              <span>Verbal</span>
-              <span>61 / 100</span>
-              <img src="./assets/images/icon-verbal.svg" alt="Verbal Icon">
-            </li>
-            <li>
-              <span>Visual</span>
-              <span>72 / 100</span>
-              <img src="./assets/images/icon-visual.svg" alt="Visual Icon">
-            </li>
-          </ul>
-        </div>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <!-- displays site properly based on user's device -->
 
-        <!-- Button -->
-        <button type="button" class="continue">Continue</button>
+      <!-- Favicon -->
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="./assets/images/favicon-32x32.png"
+      />
 
+      <title>Frontend Mentor | Results summary component</title>
+
+      <!-- Styles -->
+      <link rel="stylesheet" href="./assets/styles/style.css" />
+
+      <!-- Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet"
+      />
+    </head>
+
+    <body>
+      <div class="container">
+        <div class="card">
+          <div class="content">
+            <div class="score">
+              <h2>Your Result</h2>
+              <div class="circle">
+                <p>76</p>
+                <span>of 100</span>
+              </div>
+            </div>
+            <div class="summary">
+              <h3>Great</h3>
+              <p>
+                You scored higher than 65% of <br />
+                the people who have taken <br />
+                these tests.
+              </p>
+            </div>
+          </div>
+
+          <div class="details">
+            <h2>Summary</h2>
+            <ul>
+              <li class="react">
+                <img
+                  src="./assets/images/icon-reaction.svg"
+                  alt="Reaction Icon"
+                />
+                <span1>Reaction</span1>
+                <span2>80/100</span2>
+              </li>
+              <li class="memory">
+                <img src="./assets/images/icon-memory.svg" alt="Memory Icon" />
+                <span1>Memory</span1>
+                <span2>92/100</span2>
+              </li>
+              <li class="verbal">
+                <img src="./assets/images/icon-verbal.svg" alt="Verbal Icon" />
+                <span1>Verbal</span1>
+                <span2>61/100</span2>
+              </li>
+              <li class="visual">
+                <img src="./assets/images/icon-visual.svg" alt="Visual Icon" />
+                <span1>Visual</span1>
+                <span2>72/100</span2>
+              </li>
+            </ul>
+            <div class="continue-button">
+              <button type="button">Continue</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </body>
+    </body>
+  </html>
 </html>
