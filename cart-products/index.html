@@ -1,74 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Product list with cart</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <title>Frontend Mentor | Product list with cart</title>
 
-  Desserts
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap"
+      rel="stylesheet"
+    />
 
-  Waffle with Berries
-  Waffle
-  6.50
-  Add to Cart
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  Vanilla Bean Crème Brûlée
-  Crème Brûlée
-  7.00
-  Add to Cart
+  <body>
+    <main>
+      <div>
+        <div class="header">
+          <h1>Desserts</h1>
+        </div>
+        <div class="container">
+          <!-- Desserts items load from js file -->
+        </div>
+      </div>
 
-  Macaron Mix of Five
-  Macaron
-  8.00
-  Add to Cart
+      <div class="cart">
+        <h2>Your Cart (0)</h2>
+        <div class="cart-items">
+          <!-- Cart items load from js file -->
+          <div class="empty-cart">
+            <img
+              src="./assets/images/icon-empty-cart.svg"
+              alt="Empty cart"
+              class="emptyCartIcon"
+            />
+            <p>Your added items will appear here</p>
+          </div>
+        </div>
+      </div>
+    </main>
 
-  Classic Tiramisu
-  Tiramisu
-  5.50
-  Add to Cart
-
-  Pistachio Baklava
-  Baklava
-  4.00
-  Add to Cart
-
-  Lemon Meringue Pie
-  Pie
-  5.00
-  Add to Cart
-
-  Red Velvet Cake
-  Cake
-  4.50
-  Add to Cart
-
-  Salted Caramel Brownie
-  Brownie
-  4.50
-  Add to Cart
-
-  Vanilla Panna Cotta
-  Panna Cotta
-  6.50
-  Add to Cart
-
-  Your Cart (<!-- Quantity -->)
-  Your added items will appear here
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
