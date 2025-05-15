@@ -1,0 +1,254 @@
+/* Reusable styles */
+:root{
+
+  /* Theme styling */
+  --bg-gradient: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+  --card-bg: white;
+  --text-color: hsl(227, 75%, 14%);
+  --header-bg: white;
+  --toggle-icon: url('./assets/images/icon-moon.svg');
+}
+
+.dark-theme {
+  --bg-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
+  --card-bg: hsl(226, 25%, 17%);
+  --text-color: white;
+  --header-bg: hsl(226, 25%, 17%);
+  --toggle-icon: url('./assets/images/icon-sun.svg');
+}
+
+/* Body styling */
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: var(--header-bg);
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.header__logo img {
+  height: 32px;
+}
+
+.header_toggle button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(217, 61%, 90%);
+  transition: background-color 0.3s ease;
+}
+
+.dark-theme .header_toggle button {
+  background-color: hsl(225, 23%, 24%);
+}
+
+.header__place {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto 15px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.header__list h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.header__status {
+  display: flex;
+  gap: 10px;
+}
+
+/* Status buttons */
+.status {
+  background-color: hsl(226, 11%, 37%);
+  color: white;
+  font-size: 16px;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.status:hover {
+  opacity: 0.9;
+}
+
+.status.active {
+  background-color: hsl(3, 71%, 56%);
+}
+
+/* Card's container */
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 90%;
+  max-width: 1200px;
+  margin: 15px auto 30px;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0;
+}
+
+/* Card styling */
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 1rem;
+}
+
+.card__image {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__image img {
+  width: 24px;
+  height: 24px;
+}
+
+.card__content {
+  flex: 1;
+}
+
+.card__content h3 {
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+.card__content p {
+  margin: 0 0 16px 0;
+  color: hsl(226, 11%, 37%);
+  line-height: 1.5;
+}
+
+.dark-theme .card__content p {
+  color: hsl(217, 61%, 90%);
+}
+
+.card__content__status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__content__status p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.card__button {
+  background: hsl(226, 11%, 37%);
+  color: white;
+  font-size: 16px;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.card__button:hover {
+  background-color: hsl(225, 23%, 24%);
+}
+
+/* Toggle switch styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsl(0, 0%, 78%);
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* Toggle switch for status */
+input:checked + .slider {
+  background-color: hsl(3, 71%, 56%);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px hsl(3, 71%, 56%);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Responsive for mobile */
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Responsive for desktop */
+@media (min-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
