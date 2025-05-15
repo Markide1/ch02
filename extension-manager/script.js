@@ -53,6 +53,7 @@ function createExtensionCard(extension) {
     // Remove button 
     card.querySelector('.card__button').addEventListener('click', () => {
         card.remove();
+           
     });
     
     // Toggle switch for status
