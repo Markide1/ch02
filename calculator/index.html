@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OOP Calculator</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="calculator">
+      <h2>Simple Calculator</h2>
+      <input type="text" id="num1" placeholder="Enter first number" />
+      <input type="text" id="num2" placeholder="Enter second number" />
+      <div class="buttons">
+        <button id="add" onclick="calculate('add')">Add</button>
+        <button id="subtract" onclick="calculate('subtract')">Subtract</button>
+        <button id="multiply" onclick="calculate('multiply')">Multiply</button>
+        <button id="divide" onclick="calculate('divide')">Divide</button>
+      </div>
+      <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
