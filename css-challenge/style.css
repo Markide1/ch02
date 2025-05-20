@@ -241,12 +241,32 @@ nav ul li a {
 
 .partner-logos {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   gap: 50px;
   flex-wrap: wrap;
   margin-top: 60px;
+
 }
+
+.subcribe{
+  display: flex;
+  margin-top: 60px;
+  flex-direction: row;
+ background: #4f63f7;
+background: linear-gradient(90deg, rgba(79, 99, 247, 1) 0%, rgba(223, 16, 227, 1) 55%, rgba(255, 0, 132, 1) 100%);
+}
+
+.subscriber{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+
+}
+
+
 
 .pricing {
   padding: 80px 5%;
@@ -352,6 +372,8 @@ nav ul li a {
 
 .world-section {
   background-color: #252B42;
+  display: grid;
+  align-items: center;
   color: white;
   padding: 80px 5% 0;
 }
@@ -373,6 +395,8 @@ nav ul li a {
   color: #737373;
   max-width: 600px;
   margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
 }
 
 .world-map {
