@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+body {
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: "Montserrat", sans-serif;
+}
+
+.hero-section {
+  background-image: url("./images/hero-cover.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: #fff;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.branding {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.header-btns {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.header-btns button {
+  background-color: rgb(16, 163, 231);
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.header-btns a.login {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 80%;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: bolder;
+  margin-bottom: 50px;
+}
+
+.hero-section p {
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 20px;
+}
+
+.hero-btns button {
+  height: 50px;
+  width: 200px;
+  padding: 0 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: rgb(16, 163, 231);
+  border-radius: 20px;
+  color: white;
+}
+
+.button2 {
+  border-radius: 20px;
+  border: 1px solid white;  
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.life-cards{
+  
+}
