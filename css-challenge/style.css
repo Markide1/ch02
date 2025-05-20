@@ -249,13 +249,12 @@ nav ul li a {
   margin-top: 60px;
 }
 
-.subscribe {  
+.subscribe {
   background: linear-gradient(90deg, #00439c 0%, #7e3ba1 50%, #ff0084 100%);
   padding: 25px 40px;
   border-radius: 4px;
   align-items: center;
   margin: 40px;
-
 }
 
 .subscribe-content {
@@ -320,7 +319,6 @@ nav ul li a {
 .pricing-cards {
   display: flex;
   justify-content: center;
-  gap: 30px;
 }
 
 .price-card {
@@ -330,6 +328,8 @@ nav ul li a {
   padding: 50px 40px;
   width: 330px;
   text-align: center;
+  border: 1px solid #23a6f0;
+  border-radius: 5px;
 }
 
 .price-card.featured {
@@ -403,48 +403,59 @@ nav ul li a {
 }
 
 .world-section {
-  background-color: #252b42;
-  display: grid;
-  align-items: center;
+  background-color: #1e2742;
   color: white;
-  padding: 80px 5% 0;
+  padding: 80px 20px 180px;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .world-content {
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 80px;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
 }
 
 .world-content h2 {
   font-size: 2.5rem;
-  margin-bottom: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  max-width: 500px;
 }
 
 .world-content p {
-  color: #737373;
-  max-width: 600px;
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: row;
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 500px;
+  margin-bottom: 40px;
+  opacity: 0.8;
 }
 
 .world-map {
-  margin-bottom: 50px;
-  max-width: 600px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-width: 50%;
+  height: auto;
 }
 
 .appointment {
   display: flex;
-  background-color: #fff;
-  margin: 0 auto;
-  max-width: 1000px;
+  max-width: 900px;
+  margin: -100px auto 60px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+  background-color: white;
 }
 
 .appointment-img {
-  width: 40%;
+  flex: 1;
+  overflow: hidden;
 }
 
 .appointment-img img {
@@ -454,14 +465,16 @@ nav ul li a {
 }
 
 .appointment-form {
-  width: 60%;
+  flex: 1;
   padding: 40px;
+  background-color: white;
 }
 
 .appointment-form h3 {
-  color: #252b42;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin-bottom: 30px;
+  color: #333;
+  font-weight: 600;
 }
 
 .form-group {
@@ -470,29 +483,45 @@ nav ul li a {
 
 .form-group label {
   display: block;
-  margin-bottom: 10px;
-  color: #252b42;
-  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 15px;
-  border: 1px solid #e8e8e8;
-  border-radius: 5px;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #777;
+  background-color: #f7f4f4;
+}
+
+.form-group select {
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
+select {
+  background-image: url("./images/chevron-down-outline.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
 }
 
 .book-btn {
-  background-color: #23a6f0;
+  width: 100%;
+  padding: 15px;
+  background-color: #2196f3;
   color: white;
   border: none;
-  padding: 15px 0;
-  width: 100%;
-  border-radius: 5px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 20px;
+  transition: background-color 0.3s;
 }
 
 .consulting {
@@ -525,12 +554,11 @@ nav ul li a {
 
 footer {
   background-color: #fff;
-  /* padding: 50px 5% 30px; */
 }
 
 .footer-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 50px 5% 30px;
   margin-bottom: 50px;
 }
@@ -570,7 +598,7 @@ footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #f3e8e8;
+  background-color: #fcf5f5c9;
   padding-top: 25px;
   width: 100%;
 }
