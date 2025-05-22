@@ -148,6 +148,16 @@ const user1 = userManager.createUser("Markide One", "markide@outlook.com");
 const user2 = userManager.createUser("Sonia Kami", "kami@gmail.com");
 const user3 = userManager.createUser("Kevin Kimani", "kimani1@yahoo.com");
 
+userManager.updateUser(1, { name: "Markide Updated", email: "markide.updated@outlook.com" });
+
+userManager.deleteUser(3);
+
+
+console.log("\nAll Users:");
+userManager.getAllUsers().forEach(user => {
+  console.log(`${user.name} (${user.email})`);
+});
+
 
 
 const task1 = taskManager.createTask(
@@ -159,6 +169,10 @@ const task2 = taskManager.createTask(
   "Typescript task manager",
   "A simple commandline for task manager"
 );
+
+taskManager.updateTask(task1.id, { name: "Revised Design", description: "Use T2G designs with new features" });
+
+taskManager.deleteTask(task2.id);
 
 taskManager.addUserToTask(task1.id, user1.id);
 taskManager.addUserToTask(task1.id, user2.id);
