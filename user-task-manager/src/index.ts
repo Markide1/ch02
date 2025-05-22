@@ -1,4 +1,3 @@
-import { describe } from "node:test";
 
 interface User {
   id: number;
@@ -149,16 +148,26 @@ const user1 = userManager.createUser("Markide One", "markide@outlook.com");
 const user2 = userManager.createUser("Sonia Kami", "kami@gmail.com");
 const user3 = userManager.createUser("Kevin Kimani", "kimani1@yahoo.com");
 
-const task = taskManager.createTask(
+
+
+const task1 = taskManager.createTask(
   "Website CSS design",
   "T2G website design task"
 );
 
-taskManager.addUserToTask(task.id, user1.id);
-taskManager.addUserToTask(task.id, user2.id);
-taskManager.addUserToTask(task.id, user3.id);
+const task2 = taskManager.createTask(
+  "Typescript task manager",
+  "A simple commandline for task manager"
+);
 
-taskManager.removeUserFromTask(task.id, user2.id);
+taskManager.addUserToTask(task1.id, user1.id);
+taskManager.addUserToTask(task1.id, user2.id);
+taskManager.addUserToTask(task1.id, user3.id);
+
+taskManager.addUserToTask(task2.id, user2.id);
+
+taskManager.removeUserFromTask(task1.id, user2.id);
+
 
 console.log("\nAll Tasks:");
 
