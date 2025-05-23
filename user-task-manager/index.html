@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Task Manager</h1>
+
+      <div class="section">
+        <h2>User Management</h2>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="userName">Name:</label>
+            <input type="text" id="userName" placeholder="Enter user name" />
+          </div>
+          <div class="form-group">
+            <label for="userEmail">Email:</label>
+            <input type="email" id="userEmail" placeholder="Enter user email" />
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button id="createUserBtn">Create User</button>
+          </div>
+        </div>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="updateUserId">User ID:</label>
+            <select id="updateUserId">
+              <option value="">Select User</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="updateUserName">New Name:</label>
+            <input
+              type="text"
+              id="updateUserName"
+              placeholder="Enter new name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="updateUserEmail">New Email:</label>
+            <input
+              type="email"
+              id="updateUserEmail"
+              placeholder="Enter new email"
+            />
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="update" onclick="updateUser()">Update User</button>
+          </div>
+        </div>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="deleteUserId">User ID:</label>
+            <select id="deleteUserId">
+              <option value="">Select User</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="delete" onclick="deleteUser()">Delete User</button>
+          </div>
+        </div>
+
+        <div class="display-section">
+          <h3>All Users</h3>
+          <div id="usersList">
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Task Management</h2>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName" placeholder="Enter task name" />
+          </div>
+          <div class="form-group">
+            <label for="taskDescription">Description:</label>
+            <textarea
+              id="taskDescription"
+              placeholder="Enter task description"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button onclick="createTask()">Create Task</button>
+          </div>
+        </div>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="updateTaskId">Task ID:</label>
+            <select id="updateTaskId">
+              <option value="">Select Task</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="updateTaskName">New Name:</label>
+            <input
+              type="text"
+              id="updateTaskName"
+              placeholder="Enter new name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="updateTaskDescription">New Description:</label>
+            <textarea
+              id="updateTaskDescription"
+              placeholder="Enter new description"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="update" onclick="updateTask()">Update Task</button>
+          </div>
+        </div>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="deleteTaskId">Task ID:</label>
+            <select id="deleteTaskId">
+              <option value="">Select Task</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="delete" onclick="deleteTask()">Delete Task</button>
+          </div>
+        </div>
+
+        <div class="display-section">
+          <h3>All Tasks</h3>
+          <div id="tasksList"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Task Assignment</h2>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="assignTaskId">Task:</label>
+            <select id="assignTaskId">
+              <option value="">Select Task</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="assignUserId">User:</label>
+            <select id="assignUserId">
+              <option value="">Select User</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button onclick="assignUserToTask()">Assign User</button>
+          </div>
+        </div>
+
+        <div class="flex-form">
+          <div class="form-group">
+            <label for="removeTaskId">Task:</label>
+            <select id="removeTaskId">
+              <option value="">Select Task</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="removeUserId">User:</label>
+            <select id="removeUserId">
+              <option value="">Select User</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="delete" onclick="removeUserFromTask()">
+              Remove User
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./dist/index.js"></script>
+  </body>
+</html>

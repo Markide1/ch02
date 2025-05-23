@@ -1,4 +1,3 @@
-
 interface User {
   id: number;
   name: string;
@@ -21,7 +20,7 @@ interface UserManager {
 }
 
 interface TaskManager {
-  createTask(name: string, email: string): Task;
+  createTask(name: string, description: string): Task;
   getTask(id: string): Task | null;
   updateTask(id: string, data: Partial<Task>): boolean;
   deleteTask(id: string): boolean;
@@ -51,7 +50,7 @@ class UserManager implements UserManager {
 
   updateUser(id: number, data: Partial<User>): boolean {
     const index = this.users.findIndex((u) => u.id === id);
-    if (index == -1) return false;
+    if (index === -1) return false;
 
     this.users[index] = { ...this.users[index], ...data };
     return true;
@@ -59,7 +58,7 @@ class UserManager implements UserManager {
 
   deleteUser(id: number): boolean {
     const index = this.users.findIndex((u) => u.id === id);
-    if (index == -1) return false;
+    if (index === -1) return false;
 
     this.users.splice(index, 1);
     return true;
@@ -77,6 +76,7 @@ class TaskManager implements TaskManager {
   constructor(userManager: UserManager) {
     this.userManager = userManager;
   }
+
   createTask(name: string, description: string): Task {
     const task: Task = {
       id: Math.random().toString(36).substr(2, 9),
@@ -89,11 +89,11 @@ class TaskManager implements TaskManager {
   }
 
   getTask(id: string): Task | null {
-    return this.tasks.find((p) => p.id === id) || null;
+    return this.tasks.find((t) => t.id === id) || null;
   }
 
   updateTask(id: string, data: Partial<Task>): boolean {
-    const index = this.tasks.findIndex((p) => p.id === id);
+    const index = this.tasks.findIndex((t) => t.id === id);
     if (index === -1) return false;
 
     this.tasks[index] = { ...this.tasks[index], ...data };
@@ -101,7 +101,7 @@ class TaskManager implements TaskManager {
   }
 
   deleteTask(id: string): boolean {
-    const index = this.tasks.findIndex((p) => p.id === id);
+    const index = this.tasks.findIndex((t) => t.id === id);
     if (index === -1) return false;
 
     this.tasks.splice(index, 1);
@@ -144,54 +144,276 @@ class TaskManager implements TaskManager {
 const userManager = new UserManager();
 const taskManager = new TaskManager(userManager);
 
-const user1 = userManager.createUser("Markide One", "markide@outlook.com");
-const user2 = userManager.createUser("Sonia Kami", "kami@gmail.com");
-const user3 = userManager.createUser("Kevin Kimani", "kimani1@yahoo.com");
+const isValidEmail = (email: string) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const isValidName = (name: string) => name.trim().length >= 2;
 
-userManager.updateUser(1, { name: "Markide Updated", email: "markide.updated@outlook.com" });
+function refreshUI() {
+  updateUsersDisplay();
+  updateTasksDisplay();
+  updateSelects();
+}
 
-userManager.deleteUser(3);
+function updateUsersDisplay() {
+  const container = document.getElementById("usersList") as HTMLElement;
+  container.querySelectorAll(".singleUser").forEach((el) => el.remove());
 
-
-console.log("\nAll Users:");
-userManager.getAllUsers().forEach(user => {
-  console.log(`${user.name} (${user.email})`);
-});
-
-
-
-const task1 = taskManager.createTask(
-  "Website CSS design",
-  "T2G website design task"
-);
-
-const task2 = taskManager.createTask(
-  "Typescript task manager",
-  "A simple commandline for task manager"
-);
-
-taskManager.updateTask(task1.id, { name: "Revised Design", description: "Use T2G designs with new features" });
-
-taskManager.deleteTask(task2.id);
-
-taskManager.addUserToTask(task1.id, user1.id);
-taskManager.addUserToTask(task1.id, user2.id);
-taskManager.addUserToTask(task1.id, user3.id);
-
-taskManager.addUserToTask(task2.id, user2.id);
-
-taskManager.removeUserFromTask(task1.id, user2.id);
-
-
-console.log("\nAll Tasks:");
-
-const allTasks = taskManager.getAllTasks();
-
-allTasks.forEach((task) => {
-  console.log(`\nTask: ${task.name}`);
-  console.log(`\nDescription: ${task.description}`);
-  console.log("\nAssigned Users:");
-  task.users.forEach((user) => {
-    console.log(`${user.name} (${user.email})`);
+  userManager.getAllUsers().forEach((user) => {
+    const div = document.createElement("div");
+    div.className = "singleUser";
+    div.textContent = `${user.name} (${user.email}) - ID: ${user.id}`;
+    container.appendChild(div);
   });
+}
+
+function updateTasksDisplay() {
+  const container = document.getElementById("tasksList") as HTMLElement;
+  if (!container) return;
+
+  container.querySelectorAll(".singleTask").forEach((el) => el.remove());
+
+  taskManager.getAllTasks().forEach((task) => {
+    const div = document.createElement("div");
+    div.className = "singleTask";
+    div.innerHTML = `
+      <h4>${task.name}</h4>
+      <p>${task.description}</p>
+      <small>ID: ${task.id} | Users: ${
+      task.users.map((u) => u.name).join(", ") || "None"
+    }</small>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function updateSelects() {
+  const users = userManager.getAllUsers();
+  const tasks = taskManager.getAllTasks();
+
+  ["updateUserId", "deleteUserId", "assignUserId", "removeUserId"].forEach(
+    (id) => {
+      const select = document.getElementById(id) as HTMLSelectElement;
+      if (select) {
+        select.innerHTML = '<option value="">Select user...</option>';
+        users.forEach((user) => {
+          select.innerHTML += `<option value="${user.id}">${user.name}</option>`;
+        });
+      }
+    }
+  );
+
+  ["updateTaskId", "deleteTaskId", "assignTaskId", "removeTaskId"].forEach(
+    (id) => {
+      const select = document.getElementById(id) as HTMLSelectElement;
+      if (select) {
+        select.innerHTML = '<option value="">Select task...</option>';
+        tasks.forEach((task) => {
+          select.innerHTML += `<option value="${task.id}">${task.name}</option>`;
+        });
+      }
+    }
+  );
+}
+
+document.getElementById("createUserBtn")?.addEventListener("click", () => {
+  const nameInput = document.getElementById("userName") as HTMLInputElement;
+  const emailInput = document.getElementById("userEmail") as HTMLInputElement;
+
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+
+  if (!name || !email) {
+    alert("Please fill in both fields");
+    return;
+  }
+
+  if (!isValidName(name) || !isValidEmail(email)) {
+    alert("Please enter valid name and email");
+    return;
+  }
+
+  userManager.createUser(name, email);
+  nameInput.value = "";
+  emailInput.value = "";
+  refreshUI();
+  alert("User created successfully");
 });
+
+function updateUser() {
+  const userId = parseInt(
+    (document.getElementById("updateUserId") as HTMLSelectElement).value
+  );
+  const name = (
+    document.getElementById("updateUserName") as HTMLInputElement
+  ).value.trim();
+  const email = (
+    document.getElementById("updateUserEmail") as HTMLInputElement
+  ).value.trim();
+
+  if (!userId) {
+    alert("Please select a user");
+    return;
+  }
+
+  if (!name && !email) {
+    alert("Please provide at least one field to update");
+    return;
+  }
+
+  const updateData: Partial<User> = {};
+  if (name && isValidName(name)) updateData.name = name;
+  if (email && isValidEmail(email)) updateData.email = email;
+
+  if (userManager.updateUser(userId, updateData)) {
+    (document.getElementById("updateUserName") as HTMLInputElement).value = "";
+    (document.getElementById("updateUserEmail") as HTMLInputElement).value = "";
+    refreshUI();
+    alert("User updated successfully");
+  } else {
+    alert("Update failed");
+  }
+}
+
+function deleteUser() {
+  const userId = parseInt(
+    (document.getElementById("deleteUserId") as HTMLSelectElement).value
+  );
+
+  if (!userId) {
+    alert("Please select a user");
+    return;
+  }
+
+  if (confirm("This will remove a user!")) {
+    if (userManager.deleteUser(userId)) {
+      refreshUI();
+      alert("User deleted successfully");
+    } else {
+      alert("Delete failed");
+    }
+  }
+}
+
+function createTask() {
+  const nameInput = document.getElementById("taskName") as HTMLInputElement;
+  const descInput = document.getElementById(
+    "taskDescription"
+  ) as HTMLTextAreaElement;
+
+  const name = nameInput.value.trim();
+  const description = descInput.value.trim();
+
+  if (!name || !description) {
+    alert("Please fill in both fields");
+    return;
+  }
+
+  taskManager.createTask(name, description);
+  nameInput.value = "";
+  descInput.value = "";
+  refreshUI();
+  alert("Task created successfully");
+}
+
+function updateTask() {
+  const taskId = (document.getElementById("updateTaskId") as HTMLSelectElement)
+    .value;
+  const name = (
+    document.getElementById("updateTaskName") as HTMLInputElement
+  ).value.trim();
+  const description = (
+    document.getElementById("updateTaskDescription") as HTMLTextAreaElement
+  ).value.trim();
+
+  if (!taskId) {
+    alert("Please select a task");
+    return;
+  }
+
+  if (!name && !description) {
+    alert("Please provide at least one field to update");
+    return;
+  }
+
+  const updateData: Partial<Task> = {};
+  if (name) updateData.name = name;
+  if (description) updateData.description = description;
+
+  if (taskManager.updateTask(taskId, updateData)) {
+    (document.getElementById("updateTaskName") as HTMLInputElement).value = "";
+    (
+      document.getElementById("updateTaskDescription") as HTMLTextAreaElement
+    ).value = "";
+    refreshUI();
+    alert("Task updated successfully");
+  } else {
+    alert("Update failed");
+  }
+}
+
+function deleteTask() {
+  const taskId = (document.getElementById("deleteTaskId") as HTMLSelectElement)
+    .value;
+
+  if (!taskId) {
+    alert("Please select a task");
+    return;
+  }
+
+  if (confirm("Do you really want to delete?")) {
+    if (taskManager.deleteTask(taskId)) {
+      refreshUI();
+      alert("Task deleted successfully");
+    } else {
+      alert("Delete failed");
+    }
+  }
+}
+
+function assignUserToTask() {
+  const taskId = (document.getElementById("assignTaskId") as HTMLSelectElement)
+    .value;
+  const userId = parseInt(
+    (document.getElementById("assignUserId") as HTMLSelectElement).value
+  );
+
+  if (!taskId || !userId) {
+    alert("Please select both task and user");
+    return;
+  }
+
+  if (taskManager.addUserToTask(taskId, userId)) {
+    refreshUI();
+    alert("Task assigned successfully");
+  } else {
+    alert("Assignment failed");
+  }
+}
+
+function removeUserFromTask() {
+  const taskId = (document.getElementById("removeTaskId") as HTMLSelectElement)
+    .value;
+  const userId = parseInt(
+    (document.getElementById("removeUserId") as HTMLSelectElement).value
+  );
+
+  if (!taskId || !userId) {
+    alert("Please select both task and user");
+    return;
+  }
+
+  if (taskManager.removeUserFromTask(taskId, userId)) {
+    refreshUI();
+    alert("Task unassigned successfully");
+  } else {
+    alert("Removal failed");
+  }
+}
+
+function showMessage(message: string, isError: boolean = false): void {
+  const prefix = isError ? "Error: " : "Success: ";
+  alert(prefix + message);
+}
+
+
+document.addEventListener("DOMContentLoaded", refreshUI);
