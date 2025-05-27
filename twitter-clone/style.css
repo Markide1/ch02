@@ -117,6 +117,16 @@ body {
   padding: 1rem 0;
   margin: 0;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.posts:hover {
+  background-color: #f8f9fa;
+}
+
+.posts.active {
+  background-color: #f0f8ff;
+  border-left: 3px solid rgb(29, 161, 242);
 }
 
 .post-header {
@@ -160,6 +170,10 @@ body {
   transition: color 0.2s;
 }
 
+.engagement-item:hover {
+  color: rgb(29, 161, 242);
+}
+
 .engagement-item i {
   font-size: 1.1rem;
 }
@@ -177,6 +191,7 @@ body {
   margin: 0 0 1.5rem 0;
   padding-bottom: 0.75rem;
   font-weight: normal;
+  border-bottom: 1px solid #e1e8ed;
 }
 
 .comment {
@@ -186,6 +201,11 @@ body {
   margin: 0;
   padding: 1rem 0;
   box-shadow: none;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.comment:last-child {
+  border-bottom: none;
 }
 
 .comment-header {
@@ -210,7 +230,53 @@ body {
 .comment-body {
   margin: 0;
   font-size: 0.9rem;
+}
+
+.mobile-comments {
+  margin-top: 1rem;
+  padding: 0;
+  border-top: 1px solid #e1e8ed;
+  background-color: #f8f9fa;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.mobile-comments.show {
+  max-height: 2000px;
+  opacity: 1;
+  padding: 1rem;
+}
+
+.mobile-comments h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: #333;
   border-bottom: 1px solid #e1e8ed;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.mobile-comments .comment {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e1e8ed;
+  animation: fadeInUp 0.3s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+  background-color: transparent;
+}
+
+.mobile-comments .comment:last-child {
+  border-bottom: none;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -291,9 +357,12 @@ body {
     border-radius: 8px;
   }
 
-  .tweets-column,
-  .comments-column {
+  .tweets-column {
     min-height: auto;
+  }
+
+  .comments-column {
+    display: none;
   }
 
   .tweets,
@@ -301,9 +370,21 @@ body {
     padding: 0.75rem;
   }
 
-  .post-header,
-  .comment {
+  .posts {
     padding: 0.75rem;
+    border-bottom: 1px solid #e1e8ed;
+    margin-bottom: 0;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+
+  .posts.active {
+    background-color: #f0f8ff;
+    border-left: 3px solid rgb(29, 161, 242);
+  }
+
+  .post-header,
+  .comment-header {
     gap: 0.75rem;
   }
 

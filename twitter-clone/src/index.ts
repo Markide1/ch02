@@ -50,6 +50,7 @@ const COMMENTS_API = "https://jsonplaceholder.typicode.com/comments";
 let currentPosts: Post[] = [];
 let currentComments: Comment[] = [];
 let selectedPostId: number = 1;
+let currentUser: User | null = null;
 
 async function fetchJSON(url: string) {
   const res = await fetch(url);
@@ -105,20 +106,59 @@ function createPosts(post: Post, user: User, index: number) {
         <span>200</span>
       </div>
     </div>
+    <div class="mobile-comments" id="mobile-comments-${post.id}"></div>
   `;
+
+  posts.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('.engagement-item')) {
+      return;
+    }
+
+    const isCurrentlyActive = posts.classList.contains('active');
+    const mobileCommentsContainer = posts.querySelector('.mobile-comments') as HTMLElement;
+    
+    if (window.innerWidth < 768) {
+      if (isCurrentlyActive && mobileCommentsContainer?.classList.contains('show')) {
+    
+        mobileCommentsContainer.classList.remove('show');
+        posts.classList.remove('active');
+        return;
+      }
+    }
+    
+    const allPosts = document.querySelectorAll('.posts');
+    allPosts.forEach(p => {
+      p.classList.remove('active');
+      const mobileComments = p.querySelector('.mobile-comments') as HTMLElement;
+      if (mobileComments) {
+        mobileComments.classList.remove('show');
+      }
+    });
+    
+    posts.classList.add('active');
+    selectedPostId = post.id;
+
+    if (window.innerWidth >= 768) {
+      showCommentsForPost(post.id);
+      updateCommentsHeader(post.id);
+    }
+
+    showMobileComments(post.id);
+  });
 
   userTweet?.appendChild(posts);
 }
 
-function createComments(comment: Comment) {
+function createComments(comment: Comment, user: User) {
   const comments = document.createElement("div");
   comments.className = "comment";
   comments.innerHTML = `
     <div class="comment-header">
       <img src="user.png" />
       <div>
-        <h2>${comment.name} <i class="fa-solid fa-circle-check" style="color: #1da1f2;"></i>
+        <h2>${user.name} <i class="fa-solid fa-circle-check" style="color: #1da1f2;"></i>
         <i class="fa-brands fa-square-twitter" style="color: #1da1f2; margin-left: 0.5rem;"></i></h2>
+        <p style="margin: 0; font-size: 0.85rem; color: #657786;">@${user.username}</p>
       </div>
     </div>
     <p class="comment-body">${comment.body}</p>
@@ -136,21 +176,54 @@ function createComments(comment: Comment) {
         <span>0</span>
       </div>
     </div>
-
   `;
   return comments;
 }
 
+function showMobileComments(postId: number) {
+  const mobileCommentsContainer = document.getElementById(`mobile-comments-${postId}`);
+  if (!mobileCommentsContainer || !currentUser) return;
+
+  if (window.innerWidth >= 768) {
+    mobileCommentsContainer.classList.remove('show');
+    return;
+  }
+
+  const postComments = currentComments.filter(
+    (comment) => comment.postId === postId
+  );
+
+  if (postComments.length === 0) {
+    mobileCommentsContainer.classList.remove('show');
+    return;
+  }
+
+  mobileCommentsContainer.innerHTML = `
+    <h4>Post ${postId} Comments (${postComments.length})</h4>
+  `;
+
+  postComments.forEach((comment, index) => {
+    const commentElement = createComments(comment, currentUser!);
+    commentElement.style.animationDelay = `${index * 0.1}s`;
+    mobileCommentsContainer.appendChild(commentElement);
+  });
+
+  requestAnimationFrame(() => {
+    mobileCommentsContainer.classList.add('show');
+  });
+}
+
 function showCommentsForPost(postId: number) {
-  if (!userComments) return;
+  if (!userComments || !currentUser) return;
 
   userComments.innerHTML = "";
 
   const postComments = currentComments.filter(
     (comment) => comment.postId === postId
   );
+  
   postComments.forEach((comment) => {
-    const commentElement = createComments(comment);
+    const commentElement = createComments(comment, currentUser!);
     userComments.appendChild(commentElement);
   });
 }
@@ -158,7 +231,7 @@ function showCommentsForPost(postId: number) {
 function updateCommentsHeader(postId: number) {
   if (!commentsHeader) return;
   const postComments = currentComments.filter((c) => c.postId === postId);
-  commentsHeader.textContent = `Post ${postId} Comments`;
+  commentsHeader.textContent = `Post ${postId} Comments (${postComments.length})`;
 }
 
 async function loadUsers() {
@@ -170,6 +243,7 @@ async function loadUsers() {
 async function loadUser(userId: number) {
   try {
     const user: User = await fetchJSON(`${USERS_API}/${userId}`);
+    currentUser = user;
     setUserProfile(user);
 
     if (userTweet) userTweet.innerHTML = "";
@@ -191,13 +265,34 @@ async function loadUser(userId: number) {
 
     if (posts.length > 0) {
       selectedPostId = posts[0].id;
-      showCommentsForPost(selectedPostId);
-      updateCommentsHeader(selectedPostId);
+      if (window.innerWidth >= 768) {
+        showCommentsForPost(selectedPostId);
+        updateCommentsHeader(selectedPostId);
+      } else {
+        showMobileComments(selectedPostId);
+      }
     }
   } catch (error) {
     console.error("Error loading user data:", error);
   }
 }
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 768) {
+    document.querySelectorAll('.mobile-comments').forEach(container => {
+      (container as HTMLElement).classList.remove('show');
+    });
+    
+    showCommentsForPost(selectedPostId);
+    updateCommentsHeader(selectedPostId);
+  } else {
+    const activePost = document.querySelector('.posts.active');
+    if (activePost) {
+      const postId = parseInt(activePost.getAttribute('data-post-id') || '1');
+      showMobileComments(postId);
+    }
+  }
+});
 
 userSelect.addEventListener("change", () => {
   loadUser(parseInt(userSelect.value));
