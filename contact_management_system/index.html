@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Management System</title>
@@ -8,39 +9,35 @@
     <link rel="stylesheet" href="style.css" />
 
     <!-- Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <h2>Contact Manager</h2>
+        <h2>Contact Manager</h2>
 
-      <!-- Theme button -->
+        <!-- Theme button -->
 
-      <button id="toggle-theme"><i class="fa-solid fa-moon"></i></button>
+        <button id="toggle-theme"><i class="fa-solid fa-moon"></i></button>
 
-      <!-- Success/Error Message display area -->
+        <!-- Success/Error Message display area -->
 
-      <div id="message" style="margin: 10px 0;"></div>
+        <div id="message" style="margin: 10px 0;"></div>
 
 
-      <!-- Form to add/edit contact -->
+        <!-- Form to add/edit contact -->
 
-      <form id="contact_data">
-        <input type="hidden" id="user-id" />
-        <input type="text" id="name" placeholder="Name" required />
-        <input type="email" id="email" placeholder="name@email.com" required />
-        <input type="tel" id="mobile" placeholder="07..." required />
-        <button type="submit"><i class="fas fa-save"></i> Save</button>
-        <button type="button" id="cancel-btn">
-          <i class="fas fa-times"></i> Cancel
-        </button>
-      </form>
+        <form id="contact_data">
+            <input type="hidden" id="user-id" />
+            <input type="text" id="name" placeholder="Name" required />
+            <input type="email" id="email" placeholder="name@email.com" required />
+            <input type="tel" id="mobile" placeholder="07..." required />
+            <button type="submit"><i class="fas fa-save"></i> Save</button>
+            <button type="button" id="cancel-btn">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+        </form>
     </div>
 
     <h3>Contacts</h3>
@@ -49,9 +46,10 @@
 
     <div class="contact_list"></div>
 
-     <!-- Script to load and perform crud actions -->
+    <!-- Script to load and perform crud actions -->
 
-     <script src="./dist/index.js"></script>
+    <script src="./dist/index.js"></script>
 
-  </body>
+</body>
+
 </html>
