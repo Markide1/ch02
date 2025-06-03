@@ -1,12 +1,331 @@
 /* Basic styling */
-*{
+* {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #333;
     line-height: 1.6;
 }
 
-body{
-    background-color: whitesmoke;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+/* Header styling */
+header {
+    background-color: #6c757d;
+    color: white;
+    padding: 20px 15px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
+header h1 {
+    font-size: 2.2em;
+    margin-bottom: 8px;
+}
+
+header h3 {
+    font-size: 1.1em;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Main sections layout */
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Make borrow section span full width */
+#borrow-return-sector {
+    grid-column: 1 / -1;
+}
+
+/* Data section */
+.data-entry {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+}
+
+/* Heading styling */
+h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+form label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 5px;
+    display: block;
+}
+
+form input[type="text"],
+form input[type="email"],
+form select {
+    padding: 12px 15px;
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 1em;
+    color: #495057;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Buttons styling */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button.secondary {
+    background-color: #6c757d;
+}
+
+button.secondary:hover {
+    background-color: #545b62;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 25px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    color: #495057;
+    letter-spacing: 0.5px;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Action buttons in table */
+td button.edit,
+td button.delete {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    box-shadow: none;
+    min-width: auto;
+}
+
+td button.edit {
+    background-color: #28a745;
+}
+
+td button.edit:hover {
+    background-color: #218838;
+}
+
+td button.delete {
+    background-color: #dc3545;
+}
+
+td button.delete:hover {
+    background-color: #c82333;
+}
+
+/* Borrow/Return controls - Updated to match form styling */
+.borrow-controls,
+.return-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.borrow-controls label,
+.return-controls label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.borrow-controls select,
+.return-controls select {
+    padding: 12px 15px;
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 1em;
+    color: #495057;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.borrow-controls select:focus,
+.return-controls select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.borrow-controls button,
+.return-controls button {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+/* Alternative layout for desktop - side by side controls */
+@media screen and (min-width: 768px) {
+    .borrow-return-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    .borrow-controls,
+    .return-controls {
+        margin-bottom: 0;
+    }
+}
+
+/* Responsive Design */
+
+/* Tablet styles (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    main {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0 15px;
+    }
+    
+    #borrow-return-sector {
+        grid-column: 1;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .data-entry {
+        padding: 20px;
+    }
+    
+    h2 {
+        font-size: 1.6em;
+    }
+}
+
+/* Mobile styles (up to 768px) */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 15px 10px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    header h3 {
+        font-size: 1em;
+    }
+    
+    main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .data-entry {
+        padding: 15px;
+    }
+    
+    h2 {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+    
+    .borrow-controls,
+    .return-controls {
+        padding: 15px;
+    }
+    
+    .borrow-return-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
