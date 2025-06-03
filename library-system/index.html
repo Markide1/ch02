@@ -1,12 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library System</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
+
 <body>
+
+    <header>
+        <h1>Welcome to ELib Management System</h1>
+        <p>Your best choice to manage your library with ease</p>
+    </header>
+    <main>
+        <!-- Books Manipulation -->
+        <section class="data-entry" id="books-sector"></section>
+        <h2>Books</h2>
+        <form id="book-form">
+            <input type="hidden" id="book-id">
+            <label for="book-title">Title:</label>
+            <input type="text" id="book-title" required>
+            <label for="book-author">Author:</label>
+            <input type="text" id="book-author" required>
+            <button type="submit">Add Book</button>
+            <button type="button" id="clear-book-form" class="secondary">Cancel</button>
+        </form>
+
+        <table id="books-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    <th>Borrowed By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </section>
+
+        <!-- Members Manipulation -->
+        <section class="data-entry" id="members-sector">
+            <h2>Members</h2>
+            <form id="member-form">
+                <input type="hidden" id="member-id">
+                <label for="member-name">Name:</label>
+                <input type="text" id="member-name" required>
+                <label for="member-email">Email:</label>
+                <input type="email" id="member-email" required>
+                <button type="submit">Save Member</button>
+                <button type="button" id="clear-member-form" class="secondary">Cancel</button>
+            </form>
+
+            <table id="members-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Borrowing Manipulation -->
+        <section class="data-entry" id="borrow-return-sector">
+            <h2>Borrow/Return Books</h2>
+            <div class="borrow-controls">
+                <label for="borrow-book-select">Select Book:</label>
+                <select id="borrow-book-select">
+                </select>
+                <label for="borrow-member-select">Select Member:</label>
+                <select id="borrow-member-select">
+                </select>
+                <button id="borrow-button">Borrow Book</button>
+            </div>
+            <div class="return-controls">
+                <label for="return-book-select">Select Borrowed Book to Return:</label>
+                <select id="return-book-select">
+                </select>
+                <button id="return-button">Return Book</button>
+            </div>
+        </section>
+    </main>
+
     <script src="./dist/index.js"></script>
 </body>
+
 </html>
