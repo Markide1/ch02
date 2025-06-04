@@ -1,0 +1,38 @@
+### Book Tests
+@baseUrl = http://localhost:3000/books
+@contentType = application/json
+
+### Get all books 
+GET {{baseUrl}}
+
+### Add a book
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+    "title": "The Guide to the Galaxy",
+    "authorId": "V021",
+    "publishedYear": 2019,
+    "available": true
+}
+
+### Get one book
+GET {{baseUrl}}/3
+
+### Get book by AuthorId
+GET {{baseUrl}}/author/Us102
+
+
+### Update a book
+PUT {{baseUrl}}/3
+Content-Type: {{contentType}}
+
+{
+    "title": "Volume 2 NestJS Guide Book",
+    "publishedYear": 2024,
+    "available": true,
+    "authorId": "Sk04"
+}
+
+### Delete a book
+DELETE {{baseUrl}}/1
