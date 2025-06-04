@@ -12,7 +12,6 @@ body {
     line-height: 1.6;
 }
 
-/* Header styling */
 header {
     background-color: #6c757d;
     color: white;
@@ -30,25 +29,23 @@ header h3 {
     font-size: 1.1em;
     font-weight: 400;
     opacity: 0.9;
+    color: white;
 }
 
-/* Main sections layout */
 main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     gap: 30px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Make borrow section span full width */
 #borrow-return-sector {
     grid-column: 1 / -1;
 }
 
-/* Data section */
 .data-entry {
     background-color: white;
     padding: 25px;
@@ -57,7 +54,6 @@ main {
     border: 1px solid #e9ecef;
 }
 
-/* Heading styling */
 h2 {
     margin-top: 0;
     margin-bottom: 25px;
@@ -68,7 +64,13 @@ h2 {
     padding-bottom: 8px;
 }
 
-/* Form styling */
+h3 {
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: 500;
+    color: #495057;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -104,7 +106,12 @@ form select:focus {
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-/* Buttons styling */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 button {
     background-color: #007bff;
     color: white;
@@ -116,6 +123,7 @@ button {
     font-weight: 500;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
 }
 
 button:hover {
@@ -132,7 +140,6 @@ button.secondary:hover {
     background-color: #545b62;
 }
 
-/* Table styling */
 table {
     width: 100%;
     border-collapse: separate;
@@ -142,22 +149,76 @@ table {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-size: 0.9em;
 }
 
 table th,
 table td {
-    padding: 12px 15px;
+    padding: 10px 8px;
     text-align: left;
     border-bottom: 1px solid #dee2e6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 table th {
     background-color: #f8f9fa;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.85em;
+    font-size: 0.75em;
     color: #495057;
     letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+table th:nth-child(1),
+table td:nth-child(1) {
+    width: 60px;
+    max-width: 60px;
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+    width: 25%;
+    min-width: 120px;
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+    width: 20%;
+    min-width: 100px;
+}
+
+table th:nth-child(4),
+table td:nth-child(4) {
+    width: 15%;
+    min-width: 80px;
+}
+
+table th:nth-child(5),
+table td:nth-child(5) {
+    width: 20%;
+    min-width: 100px;
+}
+
+table th:nth-child(6),
+table td:nth-child(6) {
+    width: 120px;
+    min-width: 120px;
+    text-align: center;
+}
+
+#members-table th:nth-child(3),
+#members-table td:nth-child(3) {
+    width: 35%;
+    min-width: 150px;
+}
+
+#members-table th:nth-child(4),
+#members-table td:nth-child(4) {
+    width: 120px;
+    min-width: 120px;
+    text-align: center;
 }
 
 table tbody tr:nth-child(even) {
@@ -172,16 +233,16 @@ table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Action buttons in table */
 td button.edit,
 td button.delete {
     display: inline-block;
-    margin: 0 2px;
-    padding: 6px 12px;
-    font-size: 0.8em;
+    margin: 2px 1px;
+    padding: 4px 8px;
+    font-size: 0.75em;
     border-radius: 4px;
     box-shadow: none;
-    min-width: auto;
+    min-width: 45px;
+    white-space: nowrap;
 }
 
 td button.edit {
@@ -190,6 +251,7 @@ td button.edit {
 
 td button.edit:hover {
     background-color: #218838;
+    transform: none;
 }
 
 td button.delete {
@@ -198,19 +260,7 @@ td button.delete {
 
 td button.delete:hover {
     background-color: #c82333;
-}
-
-/* Borrow/Return controls - Updated to match form styling */
-.borrow-controls,
-.return-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 25px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
+    transform: none;
 }
 
 .borrow-controls label,
@@ -241,91 +291,126 @@ td button.delete:hover {
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-.borrow-controls button,
-.return-controls button {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 1em;
-    margin-top: 5px;
+.borrow-return-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
 }
 
-/* Alternative layout for desktop - side by side controls */
-@media screen and (min-width: 768px) {
-    .borrow-return-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-    }
-    
-    .borrow-controls,
-    .return-controls {
-        margin-bottom: 0;
-    }
-}
-
-/* Responsive Design */
-
-/* Tablet styles (768px - 1024px) */
-@media screen and (max-width: 1024px) {
+/* Responsiveness */
+@media (max-width: 1024px) {
     main {
         grid-template-columns: 1fr;
-        gap: 25px;
-        padding: 0 15px;
+        padding: 16px;
     }
-    
-    #borrow-return-sector {
-        grid-column: 1;
-    }
-    
-    header h1 {
-        font-size: 2em;
-    }
-    
-    .data-entry {
-        padding: 20px;
-    }
-    
-    h2 {
-        font-size: 1.6em;
+
+    .borrow-return-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
 }
 
-/* Mobile styles (up to 768px) */
-@media screen and (max-width: 768px) {
-    header {
-        padding: 15px 10px;
-    }
-    
+@media (max-width: 768px) {
     header h1 {
-        font-size: 1.8em;
+        font-size: 1.6em;
     }
-    
+
     header h3 {
         font-size: 1em;
     }
-    
-    main {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 10px;
-    }
-    
-    .data-entry {
-        padding: 15px;
-    }
-    
+
     h2 {
-        font-size: 1.4em;
-        margin-bottom: 20px;
+        font-size: 1.5em;
     }
-    
-    .borrow-controls,
-    .return-controls {
-        padding: 15px;
+
+    h3 {
+        font-size: 1.1em;
     }
-    
-    .borrow-return-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
+
+    .data-entry {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 16px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form select,
+    button {
+        min-height: 44px;
+        padding: 8px 12px;
+    }
+
+    td button.edit,
+    td button.delete {
+        font-size: 0.7em;
+        padding: 4px 6px;
+    }
+
+    table th,
+    table td {
+        font-size: 0.8em;
+        padding: 8px 6px;
     }
 }
+
+@media (max-width: 600px) {
+    main {
+        display: block;
+        padding: 8px;
+    }
+
+    .borrow-return-container {
+        display: block;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    td button.edit,
+    td button.delete {
+        width: 100%;
+        margin: 2px 0;
+        min-height: 36px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form select {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 8px;
+    }
+
+    h2 {
+        font-size: 1.3em;
+        margin-bottom: 16px;
+    }
+
+    .data-entry + .data-entry {
+        margin-top: 24px;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
