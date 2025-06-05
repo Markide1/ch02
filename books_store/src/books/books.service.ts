@@ -23,7 +23,7 @@ export class BooksService {
     {
       id: 3,
       title: "The Sky Is Blue",
-      authorId: "Sk2 04",
+      authorId: "Sk204",
       publishedYear: 2020,
       available: true,
     },
