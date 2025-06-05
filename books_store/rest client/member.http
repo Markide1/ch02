@@ -1,0 +1,31 @@
+### Member Tests
+@baseUrl = http://localhost:3000/members
+@contentType = application/json
+
+### Get all members
+GET {{baseUrl}}
+
+### Add a member
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "membershipType": "PREMIUM"
+}
+
+### Get one member
+GET {{baseUrl}}/1
+
+### Update a member
+PUT {{baseUrl}}/2
+Content-Type: {{contentType}}
+
+{
+    "name": "Joel Herd",
+    "membershipType": "STANDARD"
+}
+
+### Delete a member
+DELETE {{baseUrl}}/1

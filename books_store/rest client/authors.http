@@ -28,4 +28,4 @@ Content-Type: {{contentType}}
 }
 
 ### Delete an author
-DELETE {{baseUrl}}/auth01
+DELETE {{baseUrl}}/V021
