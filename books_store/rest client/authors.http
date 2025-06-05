@@ -1,0 +1,31 @@
+### Author Tests
+@baseUrl = http://localhost:3000/authors
+@contentType = application/json
+
+### Get all authors
+GET {{baseUrl}}
+
+### Add an author
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+    "name": "George Martin",
+    "birthYear": 1948,
+    "nationality": "American"
+}
+
+### Get one author
+GET {{baseUrl}}/auth01
+
+### Update an author
+PUT {{baseUrl}}/auth01
+Content-Type: {{contentType}}
+
+{
+    "name": "George Martin",
+    "nationality": "American"
+}
+
+### Delete an author
+DELETE {{baseUrl}}/auth01
