@@ -1,0 +1,115 @@
+### Book Catalog API Tests
+@baseUrl = http://localhost:3000
+@booksUrl = {{baseUrl}}/books
+@contentType = application/json
+
+
+### Get all books 
+GET {{booksUrl}}
+
+### Create a book
+POST {{booksUrl}}
+Content-Type: {{contentType}}
+
+{
+    "title": "The Great Boook",
+    "author": "Brian Kima",
+    "publication_year": 1965,
+    "isbn": "973-07b-432-5"
+}
+
+### Create book
+POST {{booksUrl}}
+Content-Type: {{contentType}}
+
+{
+    "title": "To Kill a birdie",
+    "author": "Alice Kami",
+    "publication_year": 1980,
+    "isbn": "497-t80-0n1-1"
+}
+
+
+### Create a book 
+POST {{booksUrl}}
+Content-Type: {{contentType}}
+
+{
+    "title": "Animal Farm",
+    "author": "George Orwell",
+    "publication_year": 1949,
+    "isbn": "9780451526342"
+}
+
+
+### Create book
+POST {{booksUrl}}
+Content-Type: {{contentType}}
+
+{
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "publication_year": 2011,
+    "isbn": "780-n14-14h-9"
+}
+
+### Get all books 
+GET {{booksUrl}}
+
+### Get book by ID 
+GET {{booksUrl}}/1
+
+
+### Search books by title (partial match - "great")
+GET {{booksUrl}}?title=great
+
+
+### Update book title only
+PATCH {{booksUrl}}/1
+Content-Type: {{contentType}}
+
+{
+    "title": "The Great Book - Special Edition"
+}
+
+### Update ISBN only
+PATCH {{booksUrl}}/4
+Content-Type: {{contentType}}
+
+{
+    "isbn": "680-n21-04h-1"
+}
+
+
+### Count books by year 1965
+GET {{booksUrl}}/count-by-year/1965
+
+
+### Count books by year 2011
+GET {{booksUrl}}/count-by-year/2011
+
+
+### Try to create book with duplicate ISBN 
+POST {{booksUrl}}
+Content-Type: {{contentType}}
+
+{
+    "title": "Duplicate ISBN Book",
+    "author": "Test Author",
+    "publication_year": 2023,
+    "isbn": "680-n21-04h-1"
+}
+
+### Try to update book with duplicate ISBN
+PATCH {{booksUrl}}/2
+Content-Type: {{contentType}}
+
+{
+    "isbn": "680-n21-04h-1"
+}
+
+### Delete book by ID
+DELETE {{booksUrl}}/6
+
+### Try to get deleted book 
+GET {{booksUrl}}/6
