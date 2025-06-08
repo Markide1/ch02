@@ -10,10 +10,6 @@ import { UpdateBookDto } from "./dto/update-book.dto";
 import { Book } from "./interface/book.interface";
 import { QueryResult } from "pg";
 
-interface DatabaseError extends Error {
-  code?: string;
-}
-
 @Injectable()
 export class BooksService {
   constructor(private readonly databaseService: DatabaseService) {}
@@ -21,26 +17,32 @@ export class BooksService {
   async create(createBookDto: CreateBookDto): Promise<Book> {
     const { title, author, publication_year, isbn } = createBookDto;
 
+    // First check if book with ISBN already exists
+    const existingBook = await this.findByIsbn(isbn);
+    if (existingBook) {
+      throw new ConflictException("Book with this ISBN already exists");
+    }
+
     const insertQuery = `
       INSERT INTO books (title, author, publication_year, isbn)
       VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
 
-    try {
-      const result: QueryResult<Book> = await this.databaseService.query(
-        insertQuery,
-        [title, author, publication_year, isbn],
-      );
-      return result.rows[0];
-    } catch (error) {
-      const dbError = error as DatabaseError;
-      if (dbError.code === "23505") {
-        // Unique constraint violation
-        throw new ConflictException("Book with this ISBN already exists");
-      }
-      throw error;
-    }
+    const result: QueryResult<Book> = await this.databaseService.query(
+      insertQuery,
+      [title, author, publication_year, isbn],
+    );
+    return result.rows[0];
+  }
+
+  // Add this helper method
+  private async findByIsbn(isbn: string): Promise<Book | null> {
+    const query = `SELECT * FROM books WHERE isbn = $1;`;
+    const result: QueryResult<Book> = await this.databaseService.query(query, [
+      isbn,
+    ]);
+    return result.rows[0] || null;
   }
 
   async findAll(): Promise<Book[]> {
@@ -74,6 +76,14 @@ export class BooksService {
   async update(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
     // First check if book exists
     await this.findOne(id);
+
+    // If ISBN is being updated, check for conflicts
+    if (updateBookDto.isbn) {
+      const existingBook = await this.findByIsbn(updateBookDto.isbn);
+      if (existingBook && existingBook.id !== id) {
+        throw new ConflictException("Book with this ISBN already exists");
+      }
+    }
 
     const fields: string[] = [];
     const values: (string | number)[] = [];
@@ -117,19 +127,11 @@ export class BooksService {
       RETURNING *;
     `;
 
-    try {
-      const result: QueryResult<Book> = await this.databaseService.query(
-        updateQuery,
-        values,
-      );
-      return result.rows[0];
-    } catch (error) {
-      const dbError = error as DatabaseError;
-      if (dbError.code === "23505") {
-        throw new ConflictException("Book with this ISBN already exists");
-      }
-      throw error;
-    }
+    const result: QueryResult<Book> = await this.databaseService.query(
+      updateQuery,
+      values,
+    );
+    return result.rows[0];
   }
 
   async remove(id: number): Promise<void> {

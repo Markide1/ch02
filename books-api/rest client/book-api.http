@@ -69,7 +69,7 @@ PATCH {{booksUrl}}/1
 Content-Type: {{contentType}}
 
 {
-    "title": "The Great Book - Special Edition"
+    "title": "The Great Book - First Edition"
 }
 
 ### Update ISBN only
