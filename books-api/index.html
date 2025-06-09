@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Catalog Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Books Catalog Management</h1>
+        </header>
+
+        <main>
+            <!-- Add/Edit Book Form -->
+            <section class="form-section">
+                <h2>Add New Book</h2>
+                <form id="bookForm">
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author *</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="publication_year">Publication Year *</label>
+                        <input type="number" id="publication_year" name="publication_year" min="1400" max="2025"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN *</label>
+                        <input type="text" id="isbn" name="isbn" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                    <button type="button" id="cancelEdit" class="btn btn-secondary" style="display: none;">Cancel
+                        Edit</button>
+                </form>
+            </section>
+
+            <!-- Search section -->
+            <section class="search-section">
+                <h2>Search & Filters</h2>
+                <div class="search-controls">
+                    <div class="form-group">
+                        <label for="searchTitle">Search by Title</label>
+                        <input type="text" id="searchTitle" placeholder="Enter title to search...">
+                        <button type="button" id="searchBtn" class="btn btn-primary">Search</button>
+                        <button id="showAllBtn" class="btn btn-primary">Show All Books</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="yearFilter">Count Books by Year</label>
+                        <input type="number" id="yearFilter" placeholder="Enter year...">
+                        <button type="button" id="countByYearBtn" class="btn btn-primary">Count</button>
+                    </div>
+                </div>
+                <div id="yearCountResult" class="result-message"></div>
+            </section>
+
+            <!-- Books List -->
+            <section class="books-section">
+                <h2>Books Library</h2>
+                <div id="booksCount" class="books-count"></div>
+                <div id="booksList" class="books-grid">
+                    <!-- Books will be loaded here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading state -->
+        <div id="loadingSpinner" class="spinner" style="display: none;">
+            <div class="spinner-circle"></div>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div id="messageContainer" class="message-container"></div>
+    </div>
+
+    <script src="./dist/api-app.js"></script>
+</body>
+
+</html>
