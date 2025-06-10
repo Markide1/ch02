@@ -56,6 +56,9 @@ class BooksManager {
   private yearCountResult: HTMLElement;
   private cancelEditBtn: HTMLButtonElement;
 
+  // Add new property with other DOM elements
+  private bookIdInput: HTMLInputElement;
+
   // Initialization objects
   constructor() {
     this.initializeElements();
@@ -84,6 +87,9 @@ class BooksManager {
     this.cancelEditBtn = document.getElementById(
       "cancelEdit",
     ) as HTMLButtonElement;
+
+    // ...existing code...
+    this.bookIdInput = document.getElementById("bookId") as HTMLInputElement;
   }
 
   private attachEventListeners(): void {
@@ -113,6 +119,14 @@ class BooksManager {
 
     // Cancel edit
     this.cancelEditBtn.addEventListener("click", () => this.cancelEdit());
+
+    // Find by ID functionality
+    document
+      .getElementById("findByIdBtn")
+      ?.addEventListener("click", () => this.findBookById());
+    this.bookIdInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") this.findBookById();
+    });
   }
 
   // Form validation and submission
@@ -332,43 +346,53 @@ class BooksManager {
       this.clearSearchTitle();
       this.clearFormFields();
 
-      // First get the count
-      const countResponse = await fetch(
-        `${this.booksUrl}/count-by-year/${year}`,
-      );
-      const countResult: ApiResponse<{ year: number; count: number }> =
-        await countResponse.json();
+      // Get count and books in a single request
+      const response = await fetch(`${this.booksUrl}/count-by-year/${year}`);
+      const result: ApiResponse<{ year: number; count: number }> =
+        await response.json();
 
-      if (countResponse.ok) {
+      if (response.ok) {
         this.yearCountResult.innerHTML = `
-        <div class="result-message info">
-          Found <strong>${countResult.data.count}</strong> book(s) published in <strong>${year}</strong>
-        </div>
-      `;
+          <div class="result-message info">
+            Found <strong>${result.data.count}</strong> book(s) published in <strong>${year}</strong>
+          </div>
+        `;
 
-        // Then get the actual books for that year
-        const booksResponse = await fetch(
-          `${this.booksUrl}/search/year/${year}`,
-        );
-        const booksResult: ApiResponse<Book[]> = await booksResponse.json();
+        // Update books display and count
+        if (result.data.count === 0) {
+          this.displayBooks([]);
+          this.updateBooksCount(0);
+          this.showMessage(`No books found for year ${year}`, "info", 3000);
+        } else {
+          // Load all books and filter by year client-side
+          const booksResponse = await fetch(this.booksUrl);
+          const booksResult: ApiResponse<Book[]> = await booksResponse.json();
 
-        if (booksResponse.ok) {
-          this.displayBooks(booksResult.data);
-          this.updateBooksCount(booksResult.count || booksResult.data.length);
-          this.showMessage(
-            `Showing ${booksResult.data.length} book(s) published in ${year}`,
-            "info",
-            3000,
-          );
+          if (booksResponse.ok) {
+            const filteredBooks = booksResult.data.filter(
+              (book) => book.publication_year === year,
+            );
+            this.displayBooks(filteredBooks);
+            this.updateBooksCount(filteredBooks.length);
+            this.showMessage(
+              `Showing ${filteredBooks.length} book(s) published in ${year}`,
+              "info",
+              3000,
+            );
+          } else {
+            throw new Error(booksResult.message || "Failed to load books");
+          }
         }
       } else {
-        throw new Error(countResult.message || "Count failed");
+        throw new Error(result.message || "Count failed");
       }
     } catch (error) {
       this.showMessage(
         `Count error: ${error instanceof Error ? error.message : "Unknown error"}`,
         "error",
       );
+      this.displayBooks([]);
+      this.updateBooksCount(0);
     } finally {
       this.showLoading(false);
     }
@@ -622,6 +646,42 @@ Updated: ${new Date(book.updated_at).toLocaleString()}`);
     const div = document.createElement("div");
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  // Method for finding book by ID
+  private async findBookById(): Promise<void> {
+    const id = parseInt(this.bookIdInput.value);
+    if (!id || id < 1) {
+      this.showMessage("Please enter a valid book ID", "error");
+      return;
+    }
+
+    try {
+      this.showLoading(true);
+      this.clearYearCount();
+      this.clearFormFields();
+
+      const response = await fetch(`${this.booksUrl}/${id}`);
+      const result: ApiResponse<Book> = await response.json();
+
+      if (response.ok) {
+        // Display single book
+        this.displayBooks([result.data]);
+        this.updateBooksCount(1);
+        this.showMessage(`Found book with ID: ${id}`, "success", 3000);
+      } else {
+        throw new Error(result.message || "Book not found");
+      }
+    } catch (error) {
+      this.showMessage(
+        `Error: ${error instanceof Error ? error.message : "Unknown error"}`,
+        "error",
+      );
+      this.displayBooks([]);
+      this.updateBooksCount(0);
+    } finally {
+      this.showLoading(false);
+    }
   }
 }
 
