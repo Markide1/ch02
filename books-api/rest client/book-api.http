@@ -57,7 +57,7 @@ Content-Type: {{contentType}}
 GET {{booksUrl}}
 
 ### Get book by ID 
-GET {{booksUrl}}/1
+GET {{booksUrl}}/2
 
 
 ### Search books by title (partial match - "great")
@@ -65,7 +65,7 @@ GET {{booksUrl}}?title=great
 
 
 ### Update book title only
-PATCH {{booksUrl}}/1
+PATCH {{booksUrl}}/2
 Content-Type: {{contentType}}
 
 {
@@ -85,8 +85,8 @@ Content-Type: {{contentType}}
 GET {{booksUrl}}/count-by-year/1965
 
 
-### Count books by year 2011
-GET {{booksUrl}}/count-by-year/2011
+### Count books by year 2010
+GET {{booksUrl}}/count-by-year/2010
 
 
 ### Try to create book with duplicate ISBN 
@@ -109,7 +109,7 @@ Content-Type: {{contentType}}
 }
 
 ### Delete book by ID
-DELETE {{booksUrl}}/6
+DELETE {{booksUrl}}/13
 
 ### Try to get deleted book 
 GET {{booksUrl}}/6

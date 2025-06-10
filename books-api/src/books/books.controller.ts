@@ -13,6 +13,8 @@ import {
   Query,
   HttpStatus,
   HttpCode,
+  NotFoundException,
+  ConflictException,
 } from "@nestjs/common";
 import { BooksService } from "./books.service";
 import { CreateBookDto } from "./dto/create-book.dto";
@@ -55,13 +57,21 @@ export class BooksController {
 
   // Count books by year
   @Get("count-by-year/:year")
+  @HttpCode(HttpStatus.OK)
   async countBooksByYear(@Param("year") year: string) {
-    const count = await this.booksService.countBooksByYear(parseInt(year));
-    return {
-      statusCode: HttpStatus.OK,
-      message: `Books count for year ${year}`,
-      data: { year: parseInt(year), count },
-    };
+    try {
+      const count = await this.booksService.countBooksByYear(parseInt(year));
+      return {
+        statusCode: HttpStatus.OK,
+        message: `Found ${count} books for year ${year}`,
+        data: { year: parseInt(year), count },
+      };
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException(error.message);
+      }
+      throw error;
+    }
   }
 
   // Get a single book by ID
@@ -77,13 +87,24 @@ export class BooksController {
 
   // Update a book by ID
   @Patch(":id")
+  @HttpCode(HttpStatus.OK)
   async update(@Param("id") id: string, @Body() updateBookDto: UpdateBookDto) {
-    const book = await this.booksService.update(parseInt(id), updateBookDto);
-    return {
-      statusCode: HttpStatus.OK,
-      message: "Book updated successfully",
-      data: book,
-    };
+    try {
+      const book = await this.booksService.update(parseInt(id), updateBookDto);
+      return {
+        statusCode: HttpStatus.OK,
+        message: "Book updated successfully",
+        data: book,
+      };
+    } catch (error) {
+      if (error instanceof ConflictException) {
+        throw error;
+      }
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw error;
+    }
   }
 
   // Delete a book by ID

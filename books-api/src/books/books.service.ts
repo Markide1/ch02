@@ -20,54 +20,58 @@ export class BooksService {
   async create(createBookDto: CreateBookDto): Promise<Book> {
     const { title, author, publication_year, isbn } = createBookDto;
 
-    // First check if book with ISBN already exists
+    // Check for ISBN uniqueness
     const existingBook = await this.findByIsbn(isbn);
     if (existingBook) {
       throw new ConflictException("Book with this ISBN already exists");
     }
 
-    const insertQuery = `
-      INSERT INTO books (title, author, publication_year, isbn)
-      VALUES ($1, $2, $3, $4)
-      RETURNING *;
-    `;
+    // Check duplicate book
+    const duplicateBook = await this.findByTitleAndAuthor(title, author);
+    if (duplicateBook) {
+      throw new ConflictException(
+        "This exact book already exists by this author",
+      );
+    }
 
     const result: QueryResult<Book> = await this.databaseService.query(
-      insertQuery,
+      "SELECT * FROM create_book($1, $2, $3, $4)",
       [title, author, publication_year, isbn],
     );
     return result.rows[0];
   }
 
-  // Find a book by ISBN
   private async findByIsbn(isbn: string): Promise<Book | null> {
-    const query = `SELECT * FROM books WHERE isbn = $1;`;
-    const result: QueryResult<Book> = await this.databaseService.query(query, [
-      isbn,
-    ]);
+    const result: QueryResult<Book> = await this.databaseService.query(
+      "SELECT * FROM find_book_by_isbn($1)",
+      [isbn],
+    );
+    return result.rows[0] || null;
+  }
+
+  private async findByTitleAndAuthor(
+    title: string,
+    author: string,
+  ): Promise<Book | null> {
+    const result: QueryResult<Book> = await this.databaseService.query(
+      "SELECT * FROM find_book_by_title_author($1, $2)",
+      [title, author],
+    );
     return result.rows[0] || null;
   }
 
   // Retrieve all books
   async findAll(): Promise<Book[]> {
-    const selectQuery = `
-      SELECT * FROM books 
-      ORDER BY created_at DESC;
-    `;
-
-    const result: QueryResult<Book> =
-      await this.databaseService.query(selectQuery);
+    const result: QueryResult<Book> = await this.databaseService.query(
+      "SELECT * FROM get_all_books()",
+    );
     return result.rows;
   }
 
   // Retrieve a book by ID
   async findOne(id: number): Promise<Book> {
-    const selectQuery = `
-      SELECT * FROM books WHERE id = $1;
-    `;
-
     const result: QueryResult<Book> = await this.databaseService.query(
-      selectQuery,
+      "SELECT * FROM find_book_by_id($1)",
       [id],
     );
 
@@ -81,61 +85,45 @@ export class BooksService {
   // Update a book by ID
   async update(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
     // First check if book exists
-    await this.findOne(id);
+    const existingBook = await this.findOne(id);
 
-    // If ISBN is being updated, check for conflicts
+    // Check if trying to update with same data
+    if (updateBookDto.title && updateBookDto.title === existingBook.title) {
+      throw new ConflictException("Book already has this title");
+    }
+
+    if (updateBookDto.author && updateBookDto.author === existingBook.author) {
+      throw new ConflictException("Book already has this author");
+    }
+
+    if (
+      updateBookDto.publication_year &&
+      updateBookDto.publication_year === existingBook.publication_year
+    ) {
+      throw new ConflictException("Book already has this publication year");
+    }
+
+    // Check ISBN uniqueness if being updated
     if (updateBookDto.isbn) {
-      const existingBook = await this.findByIsbn(updateBookDto.isbn);
-      if (existingBook && existingBook.id !== id) {
+      if (updateBookDto.isbn === existingBook.isbn) {
+        throw new ConflictException("Book already has this ISBN");
+      }
+
+      const bookWithIsbn = await this.findByIsbn(updateBookDto.isbn);
+      if (bookWithIsbn && bookWithIsbn.id !== id) {
         throw new ConflictException("Book with this ISBN already exists");
       }
     }
 
-    const fields: string[] = [];
-    const values: (string | number)[] = [];
-    let paramCount = 1;
-
-    if (updateBookDto.title !== undefined) {
-      fields.push(`title = $${paramCount}`);
-      values.push(updateBookDto.title);
-      paramCount++;
-    }
-
-    if (updateBookDto.author !== undefined) {
-      fields.push(`author = $${paramCount}`);
-      values.push(updateBookDto.author);
-      paramCount++;
-    }
-
-    if (updateBookDto.publication_year !== undefined) {
-      fields.push(`publication_year = $${paramCount}`);
-      values.push(updateBookDto.publication_year);
-      paramCount++;
-    }
-
-    if (updateBookDto.isbn !== undefined) {
-      fields.push(`isbn = $${paramCount}`);
-      values.push(updateBookDto.isbn);
-      paramCount++;
-    }
-
-    if (fields.length === 0) {
-      return this.findOne(id);
-    }
-
-    fields.push(`updated_at = CURRENT_TIMESTAMP`);
-    values.push(id);
-
-    const updateQuery = `
-      UPDATE books 
-      SET ${fields.join(", ")} 
-      WHERE id = $${paramCount}
-      RETURNING *;
-    `;
-
     const result: QueryResult<Book> = await this.databaseService.query(
-      updateQuery,
-      values,
+      "SELECT * FROM update_book($1, $2, $3, $4, $5)",
+      [
+        id,
+        updateBookDto.title,
+        updateBookDto.author,
+        updateBookDto.publication_year,
+        updateBookDto.isbn,
+      ],
     );
     return result.rows[0];
   }
@@ -145,35 +133,38 @@ export class BooksService {
     // First check if book exists
     await this.findOne(id);
 
-    const deleteQuery = `
-      DELETE FROM books WHERE id = $1;
-    `;
-
-    await this.databaseService.query(deleteQuery, [id]);
+    await this.databaseService.query("SELECT delete_book($1)", [id]);
   }
 
   // Count books by publication year
   async countBooksByYear(year: number): Promise<number> {
-    const countQuery = `
-      SELECT count_books_by_year($1) as count;
-    `;
-
     const result: QueryResult<{ count: string }> =
-      await this.databaseService.query(countQuery, [year]);
-    return parseInt(result.rows[0].count);
+      await this.databaseService.query(
+        "SELECT count_books_by_year($1) as count",
+        [year],
+      );
+
+    const count = parseInt(result.rows[0].count);
+    if (count === 0) {
+      throw new NotFoundException(`No books found for year ${year}`);
+    }
+    return count;
   }
 
   // Search books by title
   async searchByTitle(title: string): Promise<Book[]> {
-    const searchQuery = `
-      SELECT * FROM books 
-      WHERE title ILIKE $1
-      ORDER BY title;
-    `;
-
     const result: QueryResult<Book> = await this.databaseService.query(
-      searchQuery,
-      [`%${title}%`],
+      "SELECT * FROM search_books_by_title($1)",
+      [title],
+    );
+    return result.rows;
+  }
+
+  // Method to find books by author
+  async findByAuthor(author: string): Promise<Book[]> {
+    const result: QueryResult<Book> = await this.databaseService.query(
+      "SELECT * FROM search_books_by_author($1)",
+      [author],
     );
     return result.rows;
   }
