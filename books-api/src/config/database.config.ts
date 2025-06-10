@@ -1,5 +1,7 @@
+// Database setup file
 import { Pool } from "pg";
 
+// Database configuration object
 export interface DatabaseConfig {
   host: string;
   port: number;
@@ -12,6 +14,7 @@ export interface DatabaseConfig {
   connectionTimeoutMillis?: number;
 }
 
+// Database configuration
 export const databaseConfig: DatabaseConfig = {
   host: process.env.DB_HOST || "localhost",
   port: parseInt(process.env.DB_PORT || "5432"),
@@ -24,6 +27,7 @@ export const databaseConfig: DatabaseConfig = {
   connectionTimeoutMillis: 2000,
 };
 
+// Create a new database connection pool
 export const createDatabasePool = (): Pool => {
   return new Pool({
     host: databaseConfig.host,

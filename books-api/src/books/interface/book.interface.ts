@@ -1,3 +1,4 @@
+// Defines the book
 export class Book {
   id: number;
   title: string;

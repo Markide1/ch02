@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+// Operations file
 import {
   Controller,
   Get,
@@ -20,6 +22,7 @@ import { UpdateBookDto } from "./dto/update-book.dto";
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
+  // Create a new book
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() createBookDto: CreateBookDto) {
@@ -31,6 +34,7 @@ export class BooksController {
     };
   }
 
+  // Retrieve all books or search by title
   @Get()
   async findAll(@Query("title") title?: string) {
     let books;
@@ -49,6 +53,7 @@ export class BooksController {
     };
   }
 
+  // Count books by year
   @Get("count-by-year/:year")
   async countBooksByYear(@Param("year") year: string) {
     const count = await this.booksService.countBooksByYear(parseInt(year));
@@ -59,6 +64,7 @@ export class BooksController {
     };
   }
 
+  // Get a single book by ID
   @Get(":id")
   async findOne(@Param("id") id: string) {
     const book = await this.booksService.findOne(parseInt(id));
@@ -69,6 +75,7 @@ export class BooksController {
     };
   }
 
+  // Update a book by ID
   @Patch(":id")
   async update(@Param("id") id: string, @Body() updateBookDto: UpdateBookDto) {
     const book = await this.booksService.update(parseInt(id), updateBookDto);
@@ -79,6 +86,7 @@ export class BooksController {
     };
   }
 
+  // Delete a book by ID
   @Delete(":id")
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param("id") id: string) {

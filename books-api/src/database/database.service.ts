@@ -1,3 +1,4 @@
+// Database Service for managing PostgreSQL connections and operations
 import { Injectable, OnModuleInit, OnModuleDestroy } from "@nestjs/common";
 import { Pool, PoolClient } from "pg";
 import { createDatabasePool } from "../config/database.config";
@@ -6,6 +7,7 @@ import { createDatabasePool } from "../config/database.config";
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   private pool: Pool;
 
+  // Connection pool initialization
   async onModuleInit() {
     this.pool = createDatabasePool();
 
@@ -19,11 +21,13 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
+  // Connection pool cleanup
   async onModuleDestroy() {
     await this.pool.end();
     console.log("Database connection closed...");
   }
 
+  // Method to execute queries
   async query(text: string, params?: any[]): Promise<any> {
     const client: PoolClient = await this.pool.connect();
     try {
@@ -37,6 +41,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
+  // Method to execute raw SQL commands
   private async initializeDatabase() {
     try {
       await this.createBooksTable();
@@ -49,6 +54,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
+  // Methods to create tables, indexes, and stored procedures
   private async createBooksTable() {
     const createTableQuery = `
     CREATE TABLE IF NOT EXISTS books (

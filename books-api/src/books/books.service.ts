@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+// Business logic file
 import {
   Injectable,
   NotFoundException,
@@ -14,6 +16,7 @@ import { QueryResult } from "pg";
 export class BooksService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  // Create a new book
   async create(createBookDto: CreateBookDto): Promise<Book> {
     const { title, author, publication_year, isbn } = createBookDto;
 
@@ -36,7 +39,7 @@ export class BooksService {
     return result.rows[0];
   }
 
-  // Add this helper method
+  // Find a book by ISBN
   private async findByIsbn(isbn: string): Promise<Book | null> {
     const query = `SELECT * FROM books WHERE isbn = $1;`;
     const result: QueryResult<Book> = await this.databaseService.query(query, [
@@ -45,6 +48,7 @@ export class BooksService {
     return result.rows[0] || null;
   }
 
+  // Retrieve all books
   async findAll(): Promise<Book[]> {
     const selectQuery = `
       SELECT * FROM books 
@@ -56,6 +60,7 @@ export class BooksService {
     return result.rows;
   }
 
+  // Retrieve a book by ID
   async findOne(id: number): Promise<Book> {
     const selectQuery = `
       SELECT * FROM books WHERE id = $1;
@@ -73,6 +78,7 @@ export class BooksService {
     return result.rows[0];
   }
 
+  // Update a book by ID
   async update(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
     // First check if book exists
     await this.findOne(id);
@@ -134,6 +140,7 @@ export class BooksService {
     return result.rows[0];
   }
 
+  // Delete a book by ID
   async remove(id: number): Promise<void> {
     // First check if book exists
     await this.findOne(id);
@@ -145,6 +152,7 @@ export class BooksService {
     await this.databaseService.query(deleteQuery, [id]);
   }
 
+  // Count books by publication year
   async countBooksByYear(year: number): Promise<number> {
     const countQuery = `
       SELECT count_books_by_year($1) as count;
@@ -155,6 +163,7 @@ export class BooksService {
     return parseInt(result.rows[0].count);
   }
 
+  // Search books by title
   async searchByTitle(title: string): Promise<Book[]> {
     const searchQuery = `
       SELECT * FROM books 
