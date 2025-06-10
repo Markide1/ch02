@@ -55,6 +55,7 @@ class BooksManager {
   private yearFilter: HTMLInputElement;
   private yearCountResult: HTMLElement;
   private cancelEditBtn: HTMLButtonElement;
+  private bookIdInput: HTMLInputElement;
 
   // Initialization objects
   constructor() {
