@@ -1,0 +1,24 @@
+### Variables
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+    "email": "jkimani@user.com",
+    "password": "Pass_1223",
+    "name": "John Kimani"
+}
+
+### Login 
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+    "email": "jkimani@user.com",
+    "password": "Pass_1223"
+}
+
+

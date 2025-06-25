@@ -1,0 +1,41 @@
+<!-- Hero Section -->
+<div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:px-8 lg:py-40">
+
+  <!-- Main Content Section -->
+  <div class="mx-auto max-w-3xl text-center">
+
+    <!-- Main Heading -->
+    <h1
+      class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
+      Your Personal Notes Management Hub
+    </h1>
+    <p class="mt-6 text-lg leading-8 text-gray-600">
+      Transform your ideas into organized, accessible notes and experience the power of seamless note-taking with our
+      platform.
+    </p>
+    <p class="mt-6 text-lg leading-8 text-gray-600">
+      Whether you're a student, professional, or just someone who loves to script down thoughts, our platform is
+      designed
+      to help you capture and manage your notes effortlessly.
+    </p>
+    <!-- CTA Buttons -->
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+      <ng-container *ngIf="!(authService.currentUser$ | async); else notesButton">
+        <a routerLink="/auth/login"
+          class="rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transform hover:scale-105 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          Get started
+        </a>
+        <a routerLink="/auth/register"
+          class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors">
+          Create account <span aria-hidden="true">→</span>
+        </a>
+      </ng-container>
+      <ng-template #notesButton>
+        <a routerLink="/notes"
+          class="rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transform hover:scale-105 transition-all">
+          Go to Notes
+        </a>
+      </ng-template>
+    </div>
+  </div>
+</div>

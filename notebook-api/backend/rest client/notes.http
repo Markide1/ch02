@@ -1,0 +1,46 @@
+### Variables
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpraW1hbmlAdXNlci5jb20iLCJzdWIiOiJiN2I5NTg5OC00MjJiLTRlYTUtOTY4MS1kYjg1Y2FlNDYzODUiLCJpYXQiOjE3NTA1MDA0MjgsImV4cCI6MTc1MDU4NjgyOH0.4qixoz8EvcAybUcZn3wz6llhVQm-G45S73PxBDqAs6k
+
+@userId = b7b95898-422b-4ea5-9681-db85cae46385
+
+@noteId = 93a09e27-cf32-41dd-8b0e-cf6541194715
+
+### Create a new note
+POST {{baseUrl}}/notes
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "My First Note",
+  "content": "This is the content of my first note."
+}
+
+### Get all notes
+GET {{baseUrl}}/notes
+Authorization: Bearer {{authToken}}
+
+### Get a specific note by ID
+GET {{baseUrl}}/notes/{{noteId}}
+Authorization: Bearer {{authToken}}
+
+### Update a note
+PATCH {{baseUrl}}/notes/{{noteId}}
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "My Updated Note",
+  "content": "This is the updated content of my first note."
+}
+
+### Delete a note
+DELETE {{baseUrl}}/notes/{{noteId}}
+Authorization: Bearer {{authToken}}
+
+### Try to get deleted note
+GET {{baseUrl}}/notes/{{noteId}}
+Authorization: Bearer {{authToken}}
+

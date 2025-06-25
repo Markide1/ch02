@@ -1,0 +1,51 @@
+<!-- App Component -->
+<div class="min-h-screen bg-gray-50">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+
+          <!-- Logo/Brand -->
+          <div class="flex-shrink-0 flex items-center">
+            <a routerLink="/" class="text-xl font-bold text-gray-800 hover:text-blue-600">
+              Notes Palace
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side Navigation -->
+        <div class="flex items-center space-x-4">
+
+          <!-- User Menu -->
+          <ng-container *ngIf="authService.currentUser$ | async as user; else authButtons">
+            <div class="ml-3 relative">
+              <button (click)="logout()"
+                class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                Logout
+              </button>
+            </div>
+          </ng-container>
+          <ng-template #authButtons>
+            <a routerLink="/auth/login"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+              Login
+            </a>
+            <a routerLink="/auth/register"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+              Register
+            </a>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
