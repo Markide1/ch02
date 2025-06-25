@@ -2,11 +2,11 @@
 @baseUrl = http://localhost:3000
 @contentType = application/json
 
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpraW1hbmlAdXNlci5jb20iLCJzdWIiOiJiN2I5NTg5OC00MjJiLTRlYTUtOTY4MS1kYjg1Y2FlNDYzODUiLCJpYXQiOjE3NTA1MDA0MjgsImV4cCI6MTc1MDU4NjgyOH0.4qixoz8EvcAybUcZn3wz6llhVQm-G45S73PxBDqAs6k
+@authToken = 
 
-@userId = b7b95898-422b-4ea5-9681-db85cae46385
+@userId = 
 
-@noteId = 93a09e27-cf32-41dd-8b0e-cf6541194715
+@noteId = 
 
 ### Create a new note
 POST {{baseUrl}}/notes
